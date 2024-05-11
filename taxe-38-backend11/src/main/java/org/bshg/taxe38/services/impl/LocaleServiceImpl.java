@@ -2,13 +2,9 @@ package org.bshg.taxe38.services.impl;
 import org.bshg.taxe38.entity.Locale;
 import org.bshg.taxe38.dao.LocaleDao;
 import org.bshg.taxe38.services.facade.LocaleService;
-import org.bshg.taxe38.entity.Rue;
 import org.bshg.taxe38.services.facade.RueService;
-import org.bshg.taxe38.entity.Redevable;
 import org.bshg.taxe38.services.facade.RedevableService;
-import org.bshg.taxe38.entity.CategorieLocale;
 import org.bshg.taxe38.services.facade.CategorieLocaleService;
-import org.bshg.taxe38.zutils.service.ServiceHelper;
 import org.bshg.taxe38.zutils.pagination.Pagination;
 import org.bshg.taxe38.exceptions.NotFoundException;
 import org.springframework.data.domain.PageRequest;
@@ -142,6 +138,10 @@ return dao.deleteByRedevableId(id);
 @Override
 public List<Locale> findByRedevableId(Long id){
 return dao.findByRedevableId(id);
+}
+@Override
+public List<Locale> findByRedevableUserName(String userName){
+return dao.findByRedevableUsername(userName);
 }
 @Override
 @Transactional(rollbackFor = Exception.class)
