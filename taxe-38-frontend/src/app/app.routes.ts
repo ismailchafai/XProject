@@ -7,30 +7,26 @@ export const routes: Routes = [
 
   {path:'' , component: PageAcceuilComponent},
   {
-
-    path: 'apresDeafaultePages',
+    path: '',
     component: DefaultLayoutComponent,
     data: { title: 'Home' },
     children: [
 
-
 // START MY ENTITIES ---------------------------------------------->
       {
-        path: 'rererer',
+        path: '',
         loadChildren: () => import('./views//routes').then((m) => m.routes)
       },
       {
         path: 'notification',
         loadComponent: () => import('./layout/notification/notification.component').then(m => m.NotificationComponent),
         data: {title: 'Notification page'}
-      },
-      {
+      },{
         path: 'profile',
         loadComponent: () => import('./layout/profile/profile.component').then(m => m.ProfileComponent),
         data: {title: 'profile page'}
       },
-      {path:'user' , component: UserComponent},
-
+      {path:'user' , component: UserComponent}
     ]
   },
 

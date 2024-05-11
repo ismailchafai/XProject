@@ -30,18 +30,20 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if (!this.tokenService.isLoggedIn()) this.router.navigate(["login"]).then()
+    // if (!this.tokenService.isLoggedIn()) this.router.navigate(["login"]).then()
+    //
+    // this.router.events.subscribe((evt) => {
+    //   if (!(evt instanceof NavigationEnd)) {
+    //     return;
+    //   }
+    // });
+    if (this.tokenService.isLoggedIn())
+    {
+      this.authService.loadJwtTokenFromLocalStrage();
+      console.log("usrname :"+this.authService.username );
+      console.log("role :"+this.authService.roles );
+    }
 
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-        return;
-      }
-    });
-
-
-    this.authService.loadJwtTokenFromLocalStrage();
-    console.log("usrname :"+this.authService.username );
-    console.log("role :"+this.authService.roles );
   }
 
 
