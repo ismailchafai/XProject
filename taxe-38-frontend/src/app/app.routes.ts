@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import {UserComponent} from "./views/pages/user/user.component";
+import {PageAcceuilComponent} from "./page-acceuil/page-acceuil.component";
 
 export const routes: Routes = [
 
+  {path:'' , component: PageAcceuilComponent},
   {
-    path: '',
+
+    path: 'apresDeafaultePages',
     component: DefaultLayoutComponent,
     data: { title: 'Home' },
     children: [
@@ -13,19 +16,21 @@ export const routes: Routes = [
 
 // START MY ENTITIES ---------------------------------------------->
       {
-        path: '',
+        path: 'rererer',
         loadChildren: () => import('./views//routes').then((m) => m.routes)
       },
       {
         path: 'notification',
         loadComponent: () => import('./layout/notification/notification.component').then(m => m.NotificationComponent),
         data: {title: 'Notification page'}
-      },{
+      },
+      {
         path: 'profile',
         loadComponent: () => import('./layout/profile/profile.component').then(m => m.ProfileComponent),
         data: {title: 'profile page'}
       },
-      {path:'user' , component: UserComponent}
+      {path:'user' , component: UserComponent},
+
     ]
   },
 
