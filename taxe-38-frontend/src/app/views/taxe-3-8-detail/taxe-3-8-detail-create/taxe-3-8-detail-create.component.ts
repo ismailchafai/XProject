@@ -32,7 +32,7 @@ import {Taxe38} from "src/app/controller/entities/taxe-3-8";
     CardBodyComponent, CardHeaderComponent, InputGroupComponent, ButtonDirective,
     RouterLink, NavComponent, NavItemComponent, SpinnerComponent, IconDirective,
     FormCheckComponent, FormCheckLabelDirective, FormCheckInputDirective, FormFeedbackComponent,
-    
+
   ],
   templateUrl: './taxe-3-8-detail-create.component.html',
   styleUrl: './taxe-3-8-detail-create.component.scss'
@@ -112,6 +112,8 @@ export class Taxe38DetailCreateComponent {
   // METHODS
   create() {
     console.log(this.item)
+    this.item.montantBase=0;
+    this.item.montantParMetreCarre=0;
     if (!this.validator.validate()) return;
     this.sending = true;
     this.service.create().subscribe({

@@ -34,7 +34,7 @@ import {Taxe38Detail} from "src/app/controller/entities/taxe-3-8-detail";
     CardBodyComponent, CardHeaderComponent, InputGroupComponent, ButtonDirective,
     RouterLink, NavComponent, NavItemComponent, SpinnerComponent, IconDirective,
     FormCheckComponent, FormCheckLabelDirective, FormCheckInputDirective, FormFeedbackComponent,
-    
+
   ],
   templateUrl: './taxe-3-8-create.component.html',
   styleUrl: './taxe-3-8-create.component.scss'
@@ -113,6 +113,8 @@ export class Taxe38CreateComponent {
 
   // METHODS
   create() {
+    this.item.montantBase=0;
+    this.item.montantTotal=0;
     console.log(this.item)
     if (!this.validator.validate()) return;
     this.sending = true;

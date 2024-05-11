@@ -41,12 +41,12 @@
                 <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
                 <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
             </c-col>
-            <c-col sm="4">
+            <c-col sm="4"  style="display: none">
                 <label cLabel for="montantParMetreCarre">MontantParMetreCarre</label>
                 <input cFormControl id="montantParMetreCarre" type="number" placeholder="MontantParMetreCarre" [(ngModel)]="item.montantParMetreCarre" name="montantParMetreCarre" [valid]="validator.montantParMetreCarre.valid" (blur)="validator.montantParMetreCarre.validate()"/>
                 <c-form-feedback [valid]="false">{{ validator.montantParMetreCarre.message }}</c-form-feedback>
             </c-col>
-            <c-col sm="4">
+            <c-col sm="4" style="display: none">
                 <label cLabel for="montantBase">MontantBase</label>
                 <input cFormControl id="montantBase" type="number" placeholder="MontantBase" [(ngModel)]="item.montantBase" name="montantBase" [valid]="validator.montantBase.valid" (blur)="validator.montantBase.validate()"/>
                 <c-form-feedback [valid]="false">{{ validator.montantBase.message }}</c-form-feedback>
@@ -92,7 +92,7 @@
             <c-col sm="4">
                 <label cLabel for="taxe38">Taxe38</label>
                 <c-input-group>
-                    <select cSelect id="taxe38" name="taxe38" [(ngModel)]="taxe38.id" [valid]="validator.taxe38.valid" (blur)="validator.taxe38.validate()">
+                    <select cSelect id="taxe38" name="taxe38" [(ngModel)]="taxe38.id"  (blur)="validator.taxe38.validate()">
                         @for (it of taxe38List; track it) {
                         <option [value]="it.id">{{ it.id }}</option>
                         }

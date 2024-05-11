@@ -106,163 +106,163 @@ appUserService.save(user);
 System.out.println("One Account For USER role is created: 'user' :: '123456'");
 }
 private void generateRedevable() {
-for (int i = 0; i < 50; i++) {
-Redevable item = new Redevable();
-item.setCin("cin " + i);
-item.setFirstName("firstName " + i);
-item.setLastName("lastName " + i);
-item.setUsername("Redevable " + i);
-item.setUsername("password " + i);
-
-item.setPassword(appUserService.cryptPassword("Redevable " + i));
-List<Role> savedRoles = roleService.save(item.getRoles());
-item.setRoles(savedRoles);
-redevableService.create(item);
-}
-System.out.println("Data For Redevable Generated!");
+//for (int i = 0; i < 50; i++) {
+//Redevable item = new Redevable();
+//item.setCin("cin " + i);
+//item.setFirstName("firstName " + i);
+//item.setLastName("lastName " + i);
+//item.setUsername("Redevable " + i);
+//item.setUsername("password " + i);
+//
+//item.setPassword(appUserService.cryptPassword("Redevable " + i));
+//List<Role> savedRoles = roleService.save(item.getRoles());
+//item.setRoles(savedRoles);
+//redevableService.create(item);
+//}
+//System.out.println("Data For Redevable Generated!");
 }
 private void generateLocale() {
-for (int i = 0; i < 50; i++) {
-Locale item = new Locale();
-item.setCode("code " + i);
-item.setComplementAdresse("complementAdresse " + i);
-localeService.create(item);
-}
-System.out.println("Data For Locale Generated!");
+//for (int i = 0; i < 50; i++) {
+//Locale item = new Locale();
+//item.setCode("code " + i);
+//item.setComplementAdresse("complementAdresse " + i);
+//localeService.create(item);
+//}
+//System.out.println("Data For Locale Generated!");
 }
 private void generateRue() {
-for (int i = 0; i < 50; i++) {
-Rue item = new Rue();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-rueService.create(item);
-}
-System.out.println("Data For Rue Generated!");
+//for (int i = 0; i < 50; i++) {
+//Rue item = new Rue();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//rueService.create(item);
+//}
+//System.out.println("Data For Rue Generated!");
 }
 private void generateQuartier() {
-for (int i = 0; i < 50; i++) {
-Quartier item = new Quartier();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-quartierService.create(item);
-}
-System.out.println("Data For Quartier Generated!");
+//for (int i = 0; i < 50; i++) {
+//Quartier item = new Quartier();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//quartierService.create(item);
+//}
+//System.out.println("Data For Quartier Generated!");
 }
 private void generateSecteur() {
-for (int i = 0; i < 50; i++) {
-Secteur item = new Secteur();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-secteurService.create(item);
-}
-System.out.println("Data For Secteur Generated!");
+//for (int i = 0; i < 50; i++) {
+//Secteur item = new Secteur();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//secteurService.create(item);
+//}
+//System.out.println("Data For Secteur Generated!");
 }
 private void generateVille() {
-for (int i = 0; i < 50; i++) {
-Ville item = new Ville();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-villeService.create(item);
-}
-System.out.println("Data For Ville Generated!");
+//for (int i = 0; i < 50; i++) {
+//Ville item = new Ville();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//villeService.create(item);
+//}
+//System.out.println("Data For Ville Generated!");
 }
 private void generateCategorieLocale() {
-for (int i = 0; i < 50; i++) {
-CategorieLocale item = new CategorieLocale();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-categorieLocaleService.create(item);
-}
-System.out.println("Data For CategorieLocale Generated!");
+//for (int i = 0; i < 50; i++) {
+//CategorieLocale item = new CategorieLocale();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//categorieLocaleService.create(item);
+//}
+//System.out.println("Data For CategorieLocale Generated!");
 }
 private void generateTaxe38() {
-for (int i = 0; i < 50; i++) {
-Taxe38 item = new Taxe38();
-item.setCode("code " + i);
-taxe38Service.create(item);
-}
-System.out.println("Data For Taxe38 Generated!");
+//for (int i = 0; i < 50; i++) {
+//Taxe38 item = new Taxe38();
+//item.setCode("code " + i);
+//taxe38Service.create(item);
+//}
+//System.out.println("Data For Taxe38 Generated!");
 }
 private void generateTrim() {
-for (int i = 0; i < 50; i++) {
-Trim item = new Trim();
-item.setLibelle("libelle " + i);
-trimService.create(item);
-}
-System.out.println("Data For Trim Generated!");
+//for (int i = 0; i < 50; i++) {
+//Trim item = new Trim();
+//item.setLibelle("libelle " + i);
+//trimService.create(item);
+//}
+//System.out.println("Data For Trim Generated!");
 }
 private void generateLocale38Detail() {
-for (int i = 0; i < 50; i++) {
-Locale38Detail item = new Locale38Detail();
-item.setCode("code " + i);
-locale38DetailService.create(item);
-}
-System.out.println("Data For Locale38Detail Generated!");
+//for (int i = 0; i < 50; i++) {
+//Locale38Detail item = new Locale38Detail();
+//item.setCode("code " + i);
+//locale38DetailService.create(item);
+//}
+//System.out.println("Data For Locale38Detail Generated!");
 }
 private void generateTauxTaxe38() {
-for (int i = 0; i < 50; i++) {
-TauxTaxe38 item = new TauxTaxe38();
-item.setCode("code " + i);
-tauxTaxe38Service.create(item);
-}
-System.out.println("Data For TauxTaxe38 Generated!");
+//for (int i = 0; i < 50; i++) {
+//TauxTaxe38 item = new TauxTaxe38();
+//item.setCode("code " + i);
+//tauxTaxe38Service.create(item);
+//}
+//System.out.println("Data For TauxTaxe38 Generated!");
 }
 private void generateTaxe38Detail() {
-for (int i = 0; i < 50; i++) {
-Taxe38Detail item = new Taxe38Detail();
-item.setCode("code " + i);
-taxe38DetailService.create(item);
-}
-System.out.println("Data For Taxe38Detail Generated!");
+//for (int i = 0; i < 50; i++) {
+//Taxe38Detail item = new Taxe38Detail();
+//item.setCode("code " + i);
+//taxe38DetailService.create(item);
+//}
+//System.out.println("Data For Taxe38Detail Generated!");
 }
 private void generateTypeLocale38Detail() {
-for (int i = 0; i < 50; i++) {
-TypeLocale38Detail item = new TypeLocale38Detail();
-item.setCode("code " + i);
-item.setLibelle("libelle " + i);
-typeLocale38DetailService.create(item);
-}
-System.out.println("Data For TypeLocale38Detail Generated!");
+//for (int i = 0; i < 50; i++) {
+//TypeLocale38Detail item = new TypeLocale38Detail();
+//item.setCode("code " + i);
+//item.setLibelle("libelle " + i);
+//typeLocale38DetailService.create(item);
+//}
+//System.out.println("Data For TypeLocale38Detail Generated!");
 }
 private void generateNotificationRetardPremierNiveau() {
-for (int i = 0; i < 50; i++) {
-NotificationRetardPremierNiveau item = new NotificationRetardPremierNiveau();
-item.setCode("code " + i);
-notificationRetardPremierNiveauService.create(item);
-}
-System.out.println("Data For NotificationRetardPremierNiveau Generated!");
+//for (int i = 0; i < 50; i++) {
+//NotificationRetardPremierNiveau item = new NotificationRetardPremierNiveau();
+//item.setCode("code " + i);
+//notificationRetardPremierNiveauService.create(item);
+//}
+//System.out.println("Data For NotificationRetardPremierNiveau Generated!");
 }
 private void generateNotificationRetardDeuxiemeNiveau() {
-for (int i = 0; i < 50; i++) {
-NotificationRetardDeuxiemeNiveau item = new NotificationRetardDeuxiemeNiveau();
-item.setCode("code " + i);
-notificationRetardDeuxiemeNiveauService.create(item);
-}
-System.out.println("Data For NotificationRetardDeuxiemeNiveau Generated!");
+//for (int i = 0; i < 50; i++) {
+//NotificationRetardDeuxiemeNiveau item = new NotificationRetardDeuxiemeNiveau();
+//item.setCode("code " + i);
+//notificationRetardDeuxiemeNiveauService.create(item);
+//}
+//System.out.println("Data For NotificationRetardDeuxiemeNiveau Generated!");
 }
 private void generateNotificationRetardDeuxiemeNiveauDetail() {
-for (int i = 0; i < 50; i++) {
-NotificationRetardDeuxiemeNiveauDetail item = new NotificationRetardDeuxiemeNiveauDetail();
-item.setCode("code " + i);
-notificationRetardDeuxiemeNiveauDetailService.create(item);
-}
-System.out.println("Data For NotificationRetardDeuxiemeNiveauDetail Generated!");
+//for (int i = 0; i < 50; i++) {
+//NotificationRetardDeuxiemeNiveauDetail item = new NotificationRetardDeuxiemeNiveauDetail();
+//item.setCode("code " + i);
+//notificationRetardDeuxiemeNiveauDetailService.create(item);
+//}
+//System.out.println("Data For NotificationRetardDeuxiemeNiveauDetail Generated!");
 }
 private void generateNotificationRetardDeuxiemeNiveauDetailType38() {
-for (int i = 0; i < 50; i++) {
-NotificationRetardDeuxiemeNiveauDetailType38 item = new NotificationRetardDeuxiemeNiveauDetailType38();
-item.setCode("code " + i);
-notificationRetardDeuxiemeNiveauDetailType38Service.create(item);
-}
-System.out.println("Data For NotificationRetardDeuxiemeNiveauDetailType38 Generated!");
+//for (int i = 0; i < 50; i++) {
+//NotificationRetardDeuxiemeNiveauDetailType38 item = new NotificationRetardDeuxiemeNiveauDetailType38();
+//item.setCode("code " + i);
+//notificationRetardDeuxiemeNiveauDetailType38Service.create(item);
+//}
+//System.out.println("Data For NotificationRetardDeuxiemeNiveauDetailType38 Generated!");
 }
 private void generateNotificationRetardTroisiemeNiveau() {
-for (int i = 0; i < 50; i++) {
-NotificationRetardTroisiemeNiveau item = new NotificationRetardTroisiemeNiveau();
-item.setCode("code " + i);
-notificationRetardTroisiemeNiveauService.create(item);
-}
-System.out.println("Data For NotificationRetardTroisiemeNiveau Generated!");
+//for (int i = 0; i < 50; i++) {
+//NotificationRetardTroisiemeNiveau item = new NotificationRetardTroisiemeNiveau();
+//item.setCode("code " + i);
+//notificationRetardTroisiemeNiveauService.create(item);
+//}
+//System.out.println("Data For NotificationRetardTroisiemeNiveau Generated!");
 }
 @Autowired private RedevableService redevableService;
 @Autowired private LocaleService localeService;

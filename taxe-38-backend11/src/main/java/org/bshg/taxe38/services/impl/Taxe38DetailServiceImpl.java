@@ -48,39 +48,110 @@ found.isLast()
 //--------------- CREATE -----------------------------------
 @Transactional(rollbackFor = Exception.class)
 public Taxe38Detail create(Taxe38Detail item) {
-if (item == null) return null;
-// check if locale38Detail exists
-var locale38Detail = item.getLocale38Detail();
-if (locale38Detail != null) {
-if(locale38Detail.getId() == null) item.setLocale38Detail(null);
-else {
-var found = locale38DetailService.findById(locale38Detail.getId());
-if (found == null) throw new NotFoundException("Unknown Given Locale38Detail");
-item.setLocale38Detail(found);
-}
-}
-// check if tauxTaxe38 exists
-var tauxTaxe38 = item.getTauxTaxe38();
-if (tauxTaxe38 != null) {
-if(tauxTaxe38.getId() == null) item.setTauxTaxe38(null);
-else {
-var found = tauxTaxe38Service.findById(tauxTaxe38.getId());
-if (found == null) throw new NotFoundException("Unknown Given TauxTaxe38");
-item.setTauxTaxe38(found);
-}
-}
+//if (item == null) return null;
+//// check if locale38Detail exists
+//var locale38Detail = item.getLocale38Detail();
+//if (locale38Detail != null) {
+//if(locale38Detail.getId() == null) item.setLocale38Detail(null);
+//else {
+//var found = locale38DetailService.findById(locale38Detail.getId());
+//if (found == null) throw new NotFoundException("Unknown Given Locale38Detail");
+//item.setLocale38Detail(found);
+//}
+//}
+//// check if tauxTaxe38 exists
+//var tauxTaxe38 = item.getTauxTaxe38();
+//if (tauxTaxe38 != null) {
+//if(tauxTaxe38.getId() == null) item.setTauxTaxe38(null);
+//else {
+//var found = tauxTaxe38Service.findById(tauxTaxe38.getId());
+//if (found == null) throw new NotFoundException("Unknown Given TauxTaxe38");
+//item.setTauxTaxe38(found);
+//}
+//}
+//// check if taxe38 exists
+//var taxe38 = item.getTaxe38();
+//if (taxe38 != null) {
+//if(taxe38.getId() == null) item.setTaxe38(null);
+//else {
+//var found = taxe38Service.findById(taxe38.getId());
+//if (found == null) throw new NotFoundException("Unknown Given Taxe38");
+//item.setTaxe38(found);
+//}
+//}
+//return dao.save(item);
+
+
+
+
+
+    //*************************************************************************************//
+    double superficier = 0;
+    double montantFinale=0;
+
+    if (item == null) return null;
+    var locale38Detail = item.getLocale38Detail();
+    if (locale38Detail != null) {
+        if (locale38Detail.getId() == null) item.setLocale38Detail(null);
+        else {
+            Locale38Detail locale38Detail1 = locale38DetailService.findById(locale38Detail.getId());
+            if (locale38Detail1 == null) throw new NotFoundException("Unknown Given Locale38Detail");
+            item.setLocale38Detail(locale38Detail1);
+
+            if(locale38Detail1.getSuperficie()!=0){
+                superficier = locale38Detail1.getSuperficie();
+            }
+
+        }
+    }
+    TauxTaxe38 tauxTaxe38 = item.getTauxTaxe38();
+    if (tauxTaxe38 != null) {
+        if (tauxTaxe38.getId() == null) item.setTauxTaxe38(null);
+        else {
+            TauxTaxe38 found = tauxTaxe38Service.findById(tauxTaxe38.getId());
+            if (found == null) throw new NotFoundException("Unknown Given TauxTaxe38");
+            item.setTauxTaxe38(found);
+
+            if(found.getMontantParMetreCarre()!=0){
+                item.setMontantParMetreCarre(found.getMontantParMetreCarre());
+            }
+
+        }
+    }
 // check if taxe38 exists
-var taxe38 = item.getTaxe38();
-if (taxe38 != null) {
-if(taxe38.getId() == null) item.setTaxe38(null);
-else {
-var found = taxe38Service.findById(taxe38.getId());
-if (found == null) throw new NotFoundException("Unknown Given Taxe38");
-item.setTaxe38(found);
+    double montanBase=superficier*item.getMontantParMetreCarre();
+    System.out.println(montanBase);
+    item.setMontantBase(montanBase);
+
+    var taxe38 = item.getTaxe38();
+    if (taxe38 != null) {
+        if (taxe38.getId() == null) item.setTaxe38(null);
+        else {
+            Taxe38 found = taxe38Service.findById(taxe38.getId());
+            if (found == null) throw new NotFoundException("Unknown Given Taxe38");
+            item.setTaxe38(found);
+
+            found.setMontantTotal(found.getMontantTotal()+item.getMontantBase());
+            taxe38Service.update(found);
+//            Taxe38 foundNew = taxe38Service.findById(taxe38.getId());
+//            List<Taxe38Detail> taxe38Details=foundNew.getTaxe38Details();
+//
+//            for(Taxe38Detail taxe38Detail:taxe38Details){
+//                montantFinale+=taxe38Detail.getMontantBase();
+//            }
+
+        }
+    }
+    else {
+        item.setTauxTaxe38(null);
+    }
+
+    return dao.save(item);
 }
-}
-return dao.save(item);
-}
+
+
+
+
 @Transactional(rollbackFor = Exception.class)
 public List<Taxe38Detail> create(List<Taxe38Detail> items) {
 List<Taxe38Detail> result = new ArrayList<>();
