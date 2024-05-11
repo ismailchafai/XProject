@@ -8,6 +8,7 @@ import {jwtDecode} from "jwt-decode";
 import {isPlatformBrowser} from "@angular/common";
 import {Router} from "@angular/router";
 import {TokenService} from "./token.service";
+import {RedevableService} from "../../services/redevable.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,13 +18,17 @@ export class AuthService {
 
   private tokenService = inject(TokenService)
 
-  constructor(@Inject(PLATFORM_ID) private platformId:Object,private router:Router) {
+  constructor(@Inject(PLATFORM_ID) private platformId:Object,private router:Router,
+              private readvable :RedevableService) {
   }
 
   isAuthService : boolean =false;
   roles : any;
   username : any;
   accessToken:any;
+
+
+  khona:any;
 
   public login() {
     return this.http.post< JwtResponse>(this.url, this.item);
@@ -49,13 +54,20 @@ export class AuthService {
     //jwt decoder!!!!!
     console.log(decodejwt)
     window.localStorage.setItem("jwt-token-access",this.accessToken);
-    console.log(this.username)
-    console.log(this.roles)
-
     this.username=decodejwt.sub;
     this.roles=decodejwt.roles
+    this.readvable.findByUsername(this.username).subscribe(
+      {
+        next: (data: any) => {
+          this.khona=data
+          console.log(data)
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      }
+    )
   }
-
 
   logout() {
     this.isAuthService=false;

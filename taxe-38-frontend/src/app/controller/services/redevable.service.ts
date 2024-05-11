@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import {Pagination} from "src/app/controller/utils/pagination/pagination";
 import { Redevable } from 'src/app/controller/entities/redevable';
 import { RedevableValidator } from 'src/app/controller/validators/redevable.validator';
+import {Observable} from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class RedevableService {
@@ -63,6 +64,13 @@ export class RedevableService {
     return this.http.delete<number>(`${this.api}/id/${id}`);
   }
 
+
+  //-------------------mohammed ezzaim ------------------//
+  public findByUsername(username:string):Observable<Redevable>{
+    return this.http.get<Redevable>(`http://localhost:8036/api/redevable/username/${username}`);
+  }
+
+  //-------------------mohammed ezzaim ------------------//
 
   //------------- getters and setters -----------------------
   public get itemIsNull(): boolean {
