@@ -9,6 +9,7 @@ int deleteByRueId(Long id);
 List<Locale> findByRueId(Long id);
 int deleteByRedevableId(Long id);
 List<Locale> findByRedevableId(Long id);
+List<Locale> findByRedevableUsername(String userName);
 int deleteByCategorieLocaleId(Long id);
 List<Locale> findByCategorieLocaleId(Long id);
 }

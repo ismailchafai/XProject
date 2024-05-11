@@ -119,6 +119,12 @@ var result = service.findByRedevableId(id);
 var resultDto = converter.toDto(result);
 return ResponseEntity.ok(resultDto);
 }
+@GetMapping("/redevable/userName/{userName}")
+public ResponseEntity<List<LocaleDto>> findByRedevableUserName(@PathVariable String userName){
+var result = service.findByRedevableUserName(userName);
+var resultDto = converter.toDto(result);
+return ResponseEntity.ok(resultDto);
+}
 @DeleteMapping("/categorielocale/id/{id}")
 public ResponseEntity<Long> deleteByCategorieLocaleId(@PathVariable Long id){
 service.deleteByCategorieLocaleId(id);
