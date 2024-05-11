@@ -1,0 +1,72 @@
+<!--<c-header class="mb-4 d-print-none" position="sticky">-->
+<ng-container>
+  <c-container [fluid]="true" class="border-bottom px-4">
+    <button *ngIf="authService.roles[0]=='ADMIN'"
+      [cSidebarToggle]="sidebarId"
+      cHeaderToggler
+      class="btn"
+      toggle="visible"
+      style="margin-inline-start: -14px;"
+    >
+      <svg cIcon name="cilMenu" size="lg"></svg>
+    </button>
+
+
+    <c-header-nav class="d-none d-md-flex ms-auto ">
+      <a cNavLink routerLink="/notification">
+        <svg cIcon class="my-1" name="cilBell" size="lg"></svg>
+      </a>
+
+    </c-header-nav>
+
+    <c-header-nav class="ms-auto ms-md-0">
+      <div class="nav-item py-1">
+        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+      </div>
+      <ng-container  />
+      <div class="nav-item py-1">
+        <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
+      </div>
+    </c-header-nav>
+
+    <c-header-nav class="mx-0">
+      <ng-container *ngTemplateOutlet="userDropdown" />
+    </c-header-nav>
+
+  </c-container>
+  <c-container [fluid]="true" class="px-4" *ngIf="authService.roles[0]=='ADMIN'">
+    <c-breadcrumb-router />
+  </c-container>
+</ng-container>
+<!--</c-header>-->
+
+<ng-template #userDropdown>
+  <c-dropdown [popperOptions]="{ placement: 'bottom-start' }" variant="nav-item">
+    <button [caret]="false" cDropdownToggle class="py-0 pe-0">
+    <strong>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+      <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+    </svg>
+    </strong>
+    </button>
+    <ul cDropdownMenu class="pt-0 w-auto">
+
+
+      <li>
+        <a cDropdownItem routerLink="/profile">
+          <svg cIcon class="me-2" name="cilUser"></svg>
+          Profile
+        </a>
+      </li>
+
+      <li>
+        <a cDropdownItem (click)="logout()">
+          <svg cIcon class="me-2" name="cilAccountLogout"></svg>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </c-dropdown>
+</ng-template>
+
+

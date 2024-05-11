@@ -1,0 +1,73 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        @if (toReturn) {
+        <c-nav-item class="p-2">
+            <button cButton color="secondary" [routerLink]="returnUrl" (click)="item = undefined">Return</button>
+        </c-nav-item>
+        }
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/locale-3-8-detail" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">Reset</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="create()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPlus"></svg>
+                }
+                Create
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="superficie">Superficie</label>
+                <input cFormControl id="superficie" type="number" placeholder="Superficie" [(ngModel)]="item.superficie" name="superficie" [valid]="validator.superficie.valid" (blur)="validator.superficie.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.superficie.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="typeLocale38Detail">TypeLocale38Detail</label>
+                <c-input-group>
+                    <select cSelect id="typeLocale38Detail" name="typeLocale38Detail" [(ngModel)]="typeLocale38Detail.id" [valid]="validator.typeLocale38Detail.valid" (blur)="validator.typeLocale38Detail.validate()">
+                        @for (it of typeLocale38DetailList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToTypeLocale38DetailCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.typeLocale38Detail.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col class="g-3" sm="12">
+                <c-form-check>
+                    <input cFormCheckInput id="active" name="active" type="checkbox" [(ngModel)]="item.active"/>
+                    <label cFormCheckLabel for="active">Active</label>
+                </c-form-check>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

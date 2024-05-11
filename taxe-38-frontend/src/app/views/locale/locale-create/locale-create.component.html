@@ -1,0 +1,95 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        @if (toReturn) {
+        <c-nav-item class="p-2">
+            <button cButton color="secondary" [routerLink]="returnUrl" (click)="item = undefined">Return</button>
+        </c-nav-item>
+        }
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/locale" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">Reset</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="create()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPlus"></svg>
+                }
+                Create
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="complementAdresse">ComplementAdresse</label>
+                <input cFormControl id="complementAdresse" type="text" placeholder="ComplementAdresse" [(ngModel)]="item.complementAdresse" name="complementAdresse" [valid]="validator.complementAdresse.valid" (blur)="validator.complementAdresse.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.complementAdresse.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="rue">Rue</label>
+                <c-input-group>
+                    <select cSelect id="rue" name="rue" [(ngModel)]="rue.id" [valid]="validator.rue.valid" (blur)="validator.rue.validate()">
+                        @for (it of rueList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToRueCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.rue.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="redevable">Redevable</label>
+                <c-input-group>
+                    <select cSelect id="redevable" name="redevable" [(ngModel)]="redevable.id" [valid]="validator.redevable.valid" (blur)="validator.redevable.validate()">
+                        @for (it of redevableList; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToRedevableCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.redevable.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="categorieLocale">CategorieLocale</label>
+                <c-input-group>
+                    <select cSelect id="categorieLocale" name="categorieLocale" [(ngModel)]="categorieLocale.id" [valid]="validator.categorieLocale.valid" (blur)="validator.categorieLocale.validate()">
+                        @for (it of categorieLocaleList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToCategorieLocaleCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.categorieLocale.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

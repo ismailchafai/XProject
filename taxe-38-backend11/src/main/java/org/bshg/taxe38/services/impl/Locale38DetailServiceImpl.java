@@ -1,0 +1,116 @@
+package org.bshg.taxe38.services.impl;
+import org.bshg.taxe38.entity.Locale38Detail;
+import org.bshg.taxe38.dao.Locale38DetailDao;
+import org.bshg.taxe38.services.facade.Locale38DetailService;
+import org.bshg.taxe38.entity.TypeLocale38Detail;
+import org.bshg.taxe38.services.facade.TypeLocale38DetailService;
+import org.bshg.taxe38.zutils.service.ServiceHelper;
+import org.bshg.taxe38.zutils.pagination.Pagination;
+import org.bshg.taxe38.exceptions.NotFoundException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.ArrayList;
+@Service
+public class Locale38DetailServiceImpl implements Locale38DetailService {
+//--------------- FIND -------------------------------------
+public Locale38Detail findById(Long id) {
+return dao.findById(id).orElse(null);
+}
+public List<Locale38Detail> findAll() {
+return dao.findAll();
+}
+public List<Locale38Detail> findAllOptimized() {
+return findAll();
+}
+@Override
+public Pagination<Locale38Detail> findPaginated(int page, int size) {
+var pageable = PageRequest.of(page, size);
+var found = dao.findAll(pageable);
+var items = found.stream().toList();
+return new Pagination<>(
+items,
+found.getNumber(),
+found.getSize(),
+found.getTotalElements(),
+found.getTotalPages(),
+found.isFirst(),
+found.isLast()
+);
+}
+//--------------- CREATE -----------------------------------
+@Transactional(rollbackFor = Exception.class)
+public Locale38Detail create(Locale38Detail item) {
+if (item == null) return null;
+// check if typeLocale38Detail exists
+var typeLocale38Detail = item.getTypeLocale38Detail();
+if (typeLocale38Detail != null) {
+if(typeLocale38Detail.getId() == null) item.setTypeLocale38Detail(null);
+else {
+var found = typeLocale38DetailService.findById(typeLocale38Detail.getId());
+if (found == null) throw new NotFoundException("Unknown Given TypeLocale38Detail");
+item.setTypeLocale38Detail(found);
+}
+}
+return dao.save(item);
+}
+@Transactional(rollbackFor = Exception.class)
+public List<Locale38Detail> create(List<Locale38Detail> items) {
+List<Locale38Detail> result = new ArrayList<>();
+if (items == null || items.isEmpty()) return result;
+items.forEach(it -> result.add(create(it)));
+return result;
+}
+//--------------- UPDATE -----------------------------------
+@Transactional(rollbackFor = Exception.class)
+public Locale38Detail update(Locale38Detail item) {
+if (item == null || item.getId() == null) return null;
+var oldItem = findById(item.getId());
+if (oldItem == null) throw new NotFoundException("Unknown Locale38Detail To Be Updated!");
+return dao.save(item);
+}
+@Transactional(rollbackFor = Exception.class)
+public List<Locale38Detail> update(List<Locale38Detail> items) {
+List<Locale38Detail> result = new ArrayList<>();
+if (items == null || items.isEmpty()) return result;
+items.forEach(it -> result.add(update(it)));
+return result;
+}
+//--------------- DELETE -----------------------------------
+@Transactional(rollbackFor = Exception.class)
+public void deleteById(Long id) {
+Locale38Detail item = findById(id);
+if (item != null) delete(item);
+}
+@Transactional(rollbackFor = Exception.class)
+public void delete(Locale38Detail item) {
+dao.delete(item);
+}
+@Transactional(rollbackFor = Exception.class)
+public void delete(List<Locale38Detail> items) {
+if (items == null || items.isEmpty()) return;
+items.forEach(this::delete);
+}
+@Transactional(rollbackFor = Exception.class)
+public void deleteByIdIn(List<Long> ids) {
+dao.deleteByIdIn(ids);
+}
+//--------------- FIND AND DELETE BYs ----------------------
+@Override
+@Transactional(rollbackFor = Exception.class)
+public int deleteByTypeLocale38DetailId(Long id){
+if (id == null) return 0;
+return dao.deleteByTypeLocale38DetailId(id);
+}
+@Override
+public List<Locale38Detail> findByTypeLocale38DetailId(Long id){
+return dao.findByTypeLocale38DetailId(id);
+}
+//----------------------------------------------------------
+//----------------------------------------------------------
+@Autowired private Locale38DetailDao dao;
+@Lazy @Autowired private TypeLocale38DetailService typeLocale38DetailService;
+}

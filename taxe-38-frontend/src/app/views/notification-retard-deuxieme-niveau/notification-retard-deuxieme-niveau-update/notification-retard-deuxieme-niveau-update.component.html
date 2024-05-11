@@ -1,0 +1,103 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/notification-retard-deuxieme-niveau" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">
+                @if (resetting) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilReload"></svg>
+                }
+                Reset
+            </button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="update()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPen"></svg>
+                }
+                Update
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="anne">Anne</label>
+                <input cFormControl id="anne" type="number" placeholder="Anne" [(ngModel)]="item.anne" name="anne" [valid]="validator.anne.valid" (blur)="validator.anne.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.anne.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantBase">MontantBase</label>
+                <input cFormControl id="montantBase" type="number" placeholder="MontantBase" [(ngModel)]="item.montantBase" name="montantBase" [valid]="validator.montantBase.valid" (blur)="validator.montantBase.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantBase.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantRetardPremierMois">MontantRetardPremierMois</label>
+                <input cFormControl id="montantRetardPremierMois" type="number" placeholder="MontantRetardPremierMois" [(ngModel)]="item.montantRetardPremierMois" name="montantRetardPremierMois" [valid]="validator.montantRetardPremierMois.valid" (blur)="validator.montantRetardPremierMois.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantRetardPremierMois.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantRetardAutreMois">MontantRetardAutreMois</label>
+                <input cFormControl id="montantRetardAutreMois" type="number" placeholder="MontantRetardAutreMois" [(ngModel)]="item.montantRetardAutreMois" name="montantRetardAutreMois" [valid]="validator.montantRetardAutreMois.valid" (blur)="validator.montantRetardAutreMois.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantRetardAutreMois.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantTotal">MontantTotal</label>
+                <input cFormControl id="montantTotal" type="number" placeholder="MontantTotal" [(ngModel)]="item.montantTotal" name="montantTotal" [valid]="validator.montantTotal.valid" (blur)="validator.montantTotal.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantTotal.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="locale">Locale</label>
+                <c-input-group>
+                    <select cSelect id="locale" name="locale" [(ngModel)]="locale.id" [valid]="validator.locale.valid" (blur)="validator.locale.validate()">
+                        @for (it of localeList; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToLocaleCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.locale.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="redevable">Redevable</label>
+                <c-input-group>
+                    <select cSelect id="redevable" name="redevable" [(ngModel)]="redevable.id" [valid]="validator.redevable.valid" (blur)="validator.redevable.validate()">
+                        @for (it of redevableList; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToRedevableCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.redevable.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

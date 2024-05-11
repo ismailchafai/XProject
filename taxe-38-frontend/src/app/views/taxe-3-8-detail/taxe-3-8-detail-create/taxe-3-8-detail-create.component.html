@@ -1,0 +1,110 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        @if (toReturn) {
+        <c-nav-item class="p-2">
+            <button cButton color="secondary" [routerLink]="returnUrl" (click)="item = undefined">Return</button>
+        </c-nav-item>
+        }
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/taxe-3-8-detail" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">Reset</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="create()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPlus"></svg>
+                }
+                Create
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantParMetreCarre">MontantParMetreCarre</label>
+                <input cFormControl id="montantParMetreCarre" type="number" placeholder="MontantParMetreCarre" [(ngModel)]="item.montantParMetreCarre" name="montantParMetreCarre" [valid]="validator.montantParMetreCarre.valid" (blur)="validator.montantParMetreCarre.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantParMetreCarre.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantBase">MontantBase</label>
+                <input cFormControl id="montantBase" type="number" placeholder="MontantBase" [(ngModel)]="item.montantBase" name="montantBase" [valid]="validator.montantBase.valid" (blur)="validator.montantBase.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantBase.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantRetardPremierMois">MontantRetardPremierMois</label>
+                <input cFormControl id="montantRetardPremierMois" type="number" placeholder="MontantRetardPremierMois" [(ngModel)]="item.montantRetardPremierMois" name="montantRetardPremierMois" [valid]="validator.montantRetardPremierMois.valid" (blur)="validator.montantRetardPremierMois.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantRetardPremierMois.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantRetardAutreMois">MontantRetardAutreMois</label>
+                <input cFormControl id="montantRetardAutreMois" type="number" placeholder="MontantRetardAutreMois" [(ngModel)]="item.montantRetardAutreMois" name="montantRetardAutreMois" [valid]="validator.montantRetardAutreMois.valid" (blur)="validator.montantRetardAutreMois.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantRetardAutreMois.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="locale38Detail">Locale38Detail</label>
+                <c-input-group>
+                    <select cSelect id="locale38Detail" name="locale38Detail" [(ngModel)]="locale38Detail.id" [valid]="validator.locale38Detail.valid" (blur)="validator.locale38Detail.validate()">
+                        @for (it of locale38DetailList; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToLocale38DetailCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.locale38Detail.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="tauxTaxe38">TauxTaxe38</label>
+                <c-input-group>
+                    <select cSelect id="tauxTaxe38" name="tauxTaxe38" [(ngModel)]="tauxTaxe38.id" [valid]="validator.tauxTaxe38.valid" (blur)="validator.tauxTaxe38.validate()">
+                        @for (it of tauxTaxe38List; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToTauxTaxe38Create()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.tauxTaxe38.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="taxe38">Taxe38</label>
+                <c-input-group>
+                    <select cSelect id="taxe38" name="taxe38" [(ngModel)]="taxe38.id" [valid]="validator.taxe38.valid" (blur)="validator.taxe38.validate()">
+                        @for (it of taxe38List; track it) {
+                        <option [value]="it.id">{{ it.id }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToTaxe38Create()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.taxe38.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

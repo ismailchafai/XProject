@@ -1,0 +1,69 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/quartier" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">
+                @if (resetting) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilReload"></svg>
+                }
+                Reset
+            </button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="update()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPen"></svg>
+                }
+                Update
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="libelle">Libelle</label>
+                <input cFormControl id="libelle" type="text" placeholder="Libelle" [(ngModel)]="item.libelle" name="libelle" [valid]="validator.libelle.valid" (blur)="validator.libelle.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.libelle.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="secteur">Secteur</label>
+                <c-input-group>
+                    <select cSelect id="secteur" name="secteur" [(ngModel)]="secteur.id" [valid]="validator.secteur.valid" (blur)="validator.secteur.validate()">
+                        @for (it of secteurList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToSecteurCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.secteur.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

@@ -1,0 +1,103 @@
+@defer (when standAlon) {
+<c-row class="mb-3">
+    <c-nav class="hstack gap">
+        <c-nav-item class="p-2 ms-auto">
+            <button cButton color="secondary" variant="outline" routerLink="/taux-taxe-3-8" (click)="item = undefined">Cancel</button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="dark" (click)="reset()">
+                @if (resetting) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilReload"></svg>
+                }
+                Reset
+            </button>
+        </c-nav-item>
+        <c-nav-item class="p-2">
+            <button cButton color="primary" (click)="update()">
+                @if (sending) {
+                <c-spinner aria-hidden="true" size="sm"></c-spinner>
+                } @else {
+                <svg cIcon name="cilPen"></svg>
+                }
+                Update
+            </button>
+        </c-nav-item>
+    </c-nav>
+</c-row>
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+
+}
+
+@defer (when !standAlon) {
+<ng-container *ngTemplateOutlet="createFrom"></ng-container>
+}
+
+<ng-template #createFrom>
+<c-card class="mb-3">
+    <c-card-body>
+        <c-row class="g-3">
+            <c-col sm="4">
+                <label cLabel for="code">Code</label>
+                <input cFormControl id="code" type="text" placeholder="Code" [(ngModel)]="item.code" name="code" [valid]="validator.code.valid" (blur)="validator.code.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.code.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="montantParMetreCarre">MontantParMetreCarre</label>
+                <input cFormControl id="montantParMetreCarre" type="number" placeholder="MontantParMetreCarre" [(ngModel)]="item.montantParMetreCarre" name="montantParMetreCarre" [valid]="validator.montantParMetreCarre.valid" (blur)="validator.montantParMetreCarre.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.montantParMetreCarre.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="dateMin">DateMin</label>
+                <input cFormControl id="dateMin" type="datetime-local" placeholder="DateMin" [(ngModel)]="item.dateMin" name="dateMin" [valid]="validator.dateMin.valid" (blur)="validator.dateMin.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.dateMin.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="dateMax">DateMax</label>
+                <input cFormControl id="dateMax" type="datetime-local" placeholder="DateMax" [(ngModel)]="item.dateMax" name="dateMax" [valid]="validator.dateMax.valid" (blur)="validator.dateMax.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.dateMax.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="pourcentagePremierRetard">PourcentagePremierRetard</label>
+                <input cFormControl id="pourcentagePremierRetard" type="number" placeholder="PourcentagePremierRetard" [(ngModel)]="item.pourcentagePremierRetard" name="pourcentagePremierRetard" [valid]="validator.pourcentagePremierRetard.valid" (blur)="validator.pourcentagePremierRetard.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.pourcentagePremierRetard.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="pourcentageAutreMoisRetard">PourcentageAutreMoisRetard</label>
+                <input cFormControl id="pourcentageAutreMoisRetard" type="number" placeholder="PourcentageAutreMoisRetard" [(ngModel)]="item.pourcentageAutreMoisRetard" name="pourcentageAutreMoisRetard" [valid]="validator.pourcentageAutreMoisRetard.valid" (blur)="validator.pourcentageAutreMoisRetard.validate()"/>
+                <c-form-feedback [valid]="false">{{ validator.pourcentageAutreMoisRetard.message }}</c-form-feedback>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="typeLocale38Detail">TypeLocale38Detail</label>
+                <c-input-group>
+                    <select cSelect id="typeLocale38Detail" name="typeLocale38Detail" [(ngModel)]="typeLocale38Detail.id" [valid]="validator.typeLocale38Detail.valid" (blur)="validator.typeLocale38Detail.validate()">
+                        @for (it of typeLocale38DetailList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToTypeLocale38DetailCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.typeLocale38Detail.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+            <c-col sm="4">
+                <label cLabel for="categorieLocale">CategorieLocale</label>
+                <c-input-group>
+                    <select cSelect id="categorieLocale" name="categorieLocale" [(ngModel)]="categorieLocale.id" [valid]="validator.categorieLocale.valid" (blur)="validator.categorieLocale.validate()">
+                        @for (it of categorieLocaleList; track it) {
+                        <option [value]="it.id">{{ it.libelle }}</option>
+                        }
+                    </select>
+                    <button cButton color="secondary" type="button" variant="outline" (click)="navigateToCategorieLocaleCreate()">
+                        <svg cIcon name="cilPlus"></svg>
+                    </button>
+                    <c-form-feedback [valid]="false">{{ validator.categorieLocale.message }}</c-form-feedback>
+                </c-input-group>
+            </c-col>
+        </c-row>
+    </c-card-body>
+</c-card>
+</ng-template>
+

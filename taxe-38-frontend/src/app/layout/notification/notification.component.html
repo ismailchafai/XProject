@@ -1,0 +1,77 @@
+<div class="container">
+
+  <h1 style="text-align: center;">MY NOTIFICATIONS</h1>
+
+  <div class="row">
+
+    <div class="  col-6">
+      <mat-card>
+        <mat-card-content>
+          <Strong>notification permeier niveaux</Strong>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="  col-6">
+      <mat-card>
+        <mat-card-content>
+          <Strong>notification deusiemme niveaux</Strong>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+
+
+<div class="body " style="margin-top:2rem; border:2px #0c0c0c">
+  @for (it of pagination.data; track it; let i = $index) {
+
+
+
+
+    <div class="row">
+
+
+      <div class="col-6">
+        <mat-card>
+          <mat-card-content>
+
+            <div class="card bg-c-pink order-card">
+              <div class="modal-header">
+                <button style="position: relative;left: 56rem;top: 1rem;" type="button"
+                        class="btn-close btn-outline-info" aria-label="Close" (click)="delete()"></button>
+              </div>
+              <div class="card-block">
+                vous n'avez pas paeyer la second facture
+                <li>{{ it.id }}</li>
+                <li>{{ it.code }}</li>
+                <li>{{ it.anne }}</li>
+                <li>{{ it.montantBase }}</li>
+                <li>{{ it.locale != null ? it.locale.id : "null" }}</li>
+                <li>{{ it.redevable != null ? it.redevable.id : "null" }}</li>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-6">
+        <mat-card>
+          <mat-card-content>
+            <div class="card bg-c-yellow order-card">
+              <div class="modal-header">
+                <button style="position: relative;left: 56rem;top: 1rem;" type="button"
+                        class="btn-close btn-outline-info" aria-label="Close" (click)="delete()"></button>
+              </div>
+              <div class="card-block">
+                vous n'aveez pas payer la premier facture
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+</div>
+
+</div>
