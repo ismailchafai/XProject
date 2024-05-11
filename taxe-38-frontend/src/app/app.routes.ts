@@ -21,6 +21,11 @@ export const routes: Routes = [
         path: 'notification',
         loadComponent: () => import('./layout/notification/notification.component').then(m => m.NotificationComponent),
         data: {title: 'Notification page'}
+      },
+      {
+        path: 'listlocale',
+        loadComponent: () => import('./views/listlocalbyredevale/listlocalbyredevale.component').then(m => m.ListlocalbyredevaleComponent),
+        data: {title: 'listlocal'}
       },{
         path: 'profile',
         loadComponent: () => import('./layout/profile/profile.component').then(m => m.ProfileComponent),

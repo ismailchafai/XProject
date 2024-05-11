@@ -77,8 +77,8 @@ export class LocaleService {
   public findByRedevableId(id: number){
     return this.http.get<Array<Locale>>(`${this.api}/redevable/${id}`);
   }
-  public findByRedevableUserName(userName: string){
-    return this.http.get<Array<Locale>>(`${this.api}/redevable/userName/${userName}`);
+  public findByRedevableUsername(username: String){
+    return this.http.get<Array<Locale>>(`${this.api}/listeLocaleByRedevableUsername/${username}`);
   }
   public deleteByCategorieLocaleId(id: number){
     return this.http.delete<number>(`${this.api}/categorielocale/${id}`);

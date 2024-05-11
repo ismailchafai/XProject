@@ -17,7 +17,7 @@ dataLocale=new Array<Locale> ;
     }
 constructor(private localeService:LocaleService , private authService:AuthService) {}
   findLocaleByUserName(){
-      this.localeService.findByRedevableUserName(this.authService.username).subscribe({
+      this.localeService.findByRedevableUsername(this.authService.username).subscribe({
         next:data=>{
           this.dataLocale=data ;
           console.log("/////////////////////////////////////")

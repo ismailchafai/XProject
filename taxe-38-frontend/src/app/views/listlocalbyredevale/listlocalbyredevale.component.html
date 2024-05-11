@@ -1,0 +1,23 @@
+<table class="table table-hover" >
+  <thead>
+
+  <tr>
+    <th scope="col">code</th>
+    <th scope="col">complement Adresse</th>
+    <th scope="col">Redevable</th>
+    <th scope="col">Rue</th>
+    <th scope="col">Categorie Local</th>
+  </tr>
+  </thead>
+  <tbody>
+  @for (it of dataLocale; track it; let i = $index){
+  <tr>
+    <th scope="row">{{it.code}}</th>
+    <td>{{it.complementAdresse}}</td>
+    <td>{{it.redevable?.cin}}</td>
+    <td>{{it.rue?.libelle}}</td>
+    <td>{{it.categorieLocale?.libelle}}</td>
+  </tr>}
+
+  </tbody>
+</table>
