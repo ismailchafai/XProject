@@ -1,15 +1,15 @@
-import { Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './layout';
+import {Routes} from '@angular/router';
+import {DefaultLayoutComponent} from './layout';
 import {UserComponent} from "./views/pages/user/user.component";
 import {PageAcceuilComponent} from "./page-acceuil/page-acceuil.component";
 
 export const routes: Routes = [
 
-  {path:'' , component: PageAcceuilComponent},
+  {path: '', component: PageAcceuilComponent},
   {
     path: '',
     component: DefaultLayoutComponent,
-    data: { title: 'Home' },
+    data: {title: 'Home'},
     children: [
 
 // START MY ENTITIES ---------------------------------------------->
@@ -26,12 +26,22 @@ export const routes: Routes = [
         path: 'listlocale',
         loadComponent: () => import('./views/listlocalbyredevale/listlocalbyredevale.component').then(m => m.ListlocalbyredevaleComponent),
         data: {title: 'listlocal'}
-      },{
+      },
+      {
+        path: 'facture',
+        loadComponent: () => import('./views/facture/facture.component').then(m => m.FactureComponent),
+        data: {title: 'facture'}
+      },
+      {
+        path: 'user',
+        loadComponent: () => import('./views/pages/user/user.component').then(m => m.UserComponent),
+        data: {title: 'user'}
+      }, {
         path: 'profile',
         loadComponent: () => import('./layout/profile/profile.component').then(m => m.ProfileComponent),
         data: {title: 'profile page'}
       },
-      {path:'user' , component: UserComponent}
+      {path: 'user', component: UserComponent}
     ]
   },
 
@@ -60,5 +70,5 @@ export const routes: Routes = [
     loadComponent: () => import('./views/pages/page404/page404.component').then(m => m.Page404Component),
     data: {title: 'Register Page'}
   },
-  { path: '**', redirectTo: 'dashboard' }
+  {path: '**', redirectTo: 'dashboard'}
 ];
